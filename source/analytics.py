@@ -2,7 +2,6 @@
 #datefile as indicated above, must be in CSV format. File itself can be .txt but must at least follow the format
 #output file will be written in same format with the indicated statistics following the [Symbol].Close on each line 
 #pathToDateFile and pathToOutputFile will be paths starting from inside the source folder
-import utility as util
 import file_io as io
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots 
@@ -201,7 +200,7 @@ class Analytics:
         io.writeToFile(self.PATH_TO_OUTPUT_FILE, headerMessage)
 
         #open the data file in read mode and split by lines
-        dataFile = open(self.PATH_TO_DATA_FILE, 'r')
+        dataFile = io.readFile(self.PATH_TO_DATA_FILE)
         Lines = dataFile.readlines()
 
         #for every line of data

@@ -8,7 +8,7 @@ def writeToFile(path, data):
     with open(path, 'w') as fp:
         fp.write(data)
 
-#reads and returns all data in json file fileName at path
+#reads and returns all data in fileName at path
 def readFile(path):
     with open(path, 'r') as fp:
         return fp
