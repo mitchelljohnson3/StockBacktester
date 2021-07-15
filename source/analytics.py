@@ -110,7 +110,8 @@ class Analytics:
                 else: lossSum += abs(change)
             gainAvg = gainSum / self.RSI_PERIOD
             lossAvg = lossSum / self.RSI_PERIOD
-            _rs = gainAvg / lossAvg
+            _rs = 0
+            if(lossAvg != 0): _rs = gainAvg / lossAvg
             newRSI = 100 - (100/(1+_rs))
             newRSI = round(newRSI, 2)
             return newRSI

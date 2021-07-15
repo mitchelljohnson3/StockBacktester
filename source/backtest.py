@@ -56,7 +56,9 @@ class Backtest:
             self.update(df[i])
             #call the algorithm
             #<><><><><><><><><><><><><><><><><><>
-            self.simpleMovingAverageCrossover()
+            # self.simpleMovingAverageCrossover()
+            #self.RSIThresholdCrossover()
+            self.MACDandRSI()
             #<><><><><><><><><><><><><><><><><><>
 
         #sell off remaining shares if any remain and DUMP_REMAINING_ASSETS is true
@@ -65,8 +67,8 @@ class Backtest:
         #print backtest results statement
         remaining_assets = self.BUDGET + (self.QUANTITY * self.DATA["CURRENT_CLOSE"])
         print("------------------------------------------")
-        print("Assets Remaining: " + str(remaining_assets))
-        print("Cash Remaining: " + str(self.BUDGET))
+        print("Assets Remaining: " + str(round(remaining_assets, 2)))
+        print("Cash Remaining: " + str(round(self.BUDGET, 2)))
         print("Quantity Remaining: " + str(self.QUANTITY))
         print("------------------------------------------")
 
@@ -86,6 +88,7 @@ class Backtest:
 
     #buys quantity of symbol
     def buy(self, quantity):
+        if(quantity == 0): return
         #if not enough money to complete buy order
         if (not self.fundsAvailable(quantity)): 
             self.orderFailed(quantity, True)
@@ -98,6 +101,7 @@ class Backtest:
         
     #sells quantity of symbol
     def sell(self, quantity):
+        if(quantity == 0): return
         #if not enough shares to complete sell order
         if (not self.sharesAvailable(quantity)):
             self.orderFailed(quantity, False)
@@ -119,22 +123,79 @@ class Backtest:
         if (quantity <= self.QUANTITY): return True
         return False
 
-    #returns True in the event of indicator_1 crossing ABOVE indicator_2
+    #buys as many shares as possible
+    def allIn(self):
+        maxShares = int(self.BUDGET / self.DATA["CURRENT_CLOSE"])
+        self.buy(maxShares)
+    #sells all shares
+    def allOut(self):
+        self.sell(self.QUANTITY)
+
+    #-------------------------------------------------------------------------------------------------------------------------------------
+    #below are functions that help in writing investment strategy functions
     #indicator_1 and indicator_2 are string representations of the indicator. Ex: "SMA5", or "RSI", or "MACD"
+
+    #returns True in the event of indicator_1 crossing ABOVE indicator_2
     def crossesOver(self, indicator_1, indicator_2):
+        if (self.DATA[indicator_1] == 0.0 or self.DATA[indicator_2] == 0.0): return False
         indicator_1_above_indicator_2 = self.DATA[indicator_1] > self.DATA[indicator_2]
         crossover_just_occurred = self.PREVIOUS_DATA[indicator_1] < self.PREVIOUS_DATA[indicator_2]
         return (indicator_1_above_indicator_2 and crossover_just_occurred)
 
+    #returns True in the event of indicator_1 crossing BELOW indicator_2
+    def crossesBelow(self, indicator_1, indicator_2):
+        if (self.DATA[indicator_1] == 0.0 or self.DATA[indicator_2] == 0.0): return False
+        indicator_1_below_indicator_2 = self.DATA[indicator_1] < self.DATA[indicator_2]
+        crossover_just_occurred = self.PREVIOUS_DATA[indicator_1] > self.PREVIOUS_DATA[indicator_2]
+        return (indicator_1_above_indicator_2 and crossover_just_occurred)
+
+    #returns True if indicator_1 is currently ABOVE indicator_2
+    def isAbove(self, indicator_1, indicator_2):
+        if (self.DATA[indicator_1] == 0.0 or self.DATA[indicator_2] == 0.0): return False
+        indicator_1_above_indicator_2 = self.DATA[indicator_1] > self.DATA[indicator_2]
+        return indicator_1_above_indicator_2
+
+    #returns True if indicator_1 is currently BELOW indicator_2
+    def isBelow(self, indicator_1, indicator_2):
+        if (self.DATA[indicator_1] == 0.0 or self.DATA[indicator_2] == 0.0): return False
+        indicator_1_below_indicator_2 = self.DATA[indicator_1] < self.DATA[indicator_2]
+        return indicator_1_below_indicator_2
+
+    #returns True if indicator_1 is currently ABOVE value. value is a number
+    def isAboveValue(self, indicator_1, value):
+        if (self.DATA[indicator_1] == 0.0): return False
+        indicator_1_above_value = self.DATA[indicator_1] > value
+        return indicator_1_above_value
+
+    #returns True if indicator_1 is currently BELOW value. value is a number
+    def isBelowValue(self, indicator_1, value):
+        if (self.DATA[indicator_1] == 0.0): return False
+        indicator_1_below_value = self.DATA[indicator_1] < value
+        return indicator_1_below_value
+
     #-------------------------------------------------------------------------------------------------------------------------------------
     #-------------------------------------------------------------------------------------------------------------------------------------
-    #Below is where different investment strategies will be called
+    #Below is where different investment strategies will be defined
     #-------------------------------------------------------------------------------------------------------------------------------------
     #-------------------------------------------------------------------------------------------------------------------------------------
     
     #this strategy simply buys when the SMA5 crosses above the SMA20 and sells when the SMA20 crosses above the SMA5
     def simpleMovingAverageCrossover(self):
-        if (self.crossesOver("MACD", "MACDSig")):
+        if (self.crossesOver("SMA5", "SMA20")):
+            self.allIn()
+        if (self.crossesOver("SMA20", "SMA5")):
+            self.allOut()
+
+    #buys when RSI crosses under underbought signal, and sells when RSI crosses overbought signal
+    def RSIThresholdCrossover(self):
+        if (self.crossesOver("RSIL", "RSI")):
             self.buy(50)
-        if (self.crossesOver("MACDSig", "MACD")):
+        if (self.crossesOver("RSI", "RSIU")):
             self.sell(50)
+
+    #MACD and RSI crossover
+    def MACDandRSI(self):
+        if (self.crossesOver("MACD", "MACDSig") and self.isBelowValue("RSI", 30)):
+            self.allIn()
+        if (self.crossesOver("MACDSig", "MACD") and self.isAboveValue("RSI", 70)):
+            self.allOut()
