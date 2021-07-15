@@ -1,5 +1,6 @@
 {
     "analytics": {
+        "JUST_GRAPH": true,
         "PATH_TO_DATA_FILE": "../historical_data/2015_daily/AAPL.csv",
         "PATH_TO_OUTPUT_FILE": "../analytics_output.csv",
         "SYMBOL": "AAPL",
@@ -16,8 +17,10 @@
     },
     "backtest": {
         "PATH_TO_HISTORY_FILE": "../backtest_output/order_history.txt",
-        "PATH_TO_PORTFOLIO_FILE": "../backtest_output/portfolio.json",
+        "PATH_TO_RESULTS_FILE": "../backtest_output/backtest_results.csv",
         "PATH_TO_DATA_FILE": "../analytics_output.csv",
-        "SYMBOL": "AAPL"
+        "SYMBOL": "AAPL",
+        "BUDGET": 100000,
+        "DUMP_REMAINING_ASSETS": false
     }
 }

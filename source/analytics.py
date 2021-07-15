@@ -14,6 +14,8 @@ class Analytics:
         #import config settings
         #----------------------------------------------------------------------------------
         config = io.fetchJSON("../config.json")["analytics"]
+        #should the analytics module just graph the current output file and skip the calculating?
+        self.JUST_GRAPH = config["JUST_GRAPH"]
         #set instance variables
         self.SYMBOL = config["SYMBOL"]
         self.PATH_TO_DATA_FILE = config["PATH_TO_DATA_FILE"]
@@ -194,14 +196,17 @@ class Analytics:
 
     #runs analytics module, produces graph
     def run(self):
+        #if JUST_GRAPH is true, skip the calculating and just graph
+        if (self.JUST_GRAPH): 
+            self.displayGraph()
+            return
         #create custom header message for output file and write to outputfile
         headerMessage = 'Date,{}.Open,{}.High,{}.Low,{}.Close,Volume'.format(self.SYMBOL,self.SYMBOL,self.SYMBOL,self.SYMBOL)
         headerMessage += self.getStatisticHeaderString()
         io.writeToFile(self.PATH_TO_OUTPUT_FILE, headerMessage)
 
         #open the data file in read mode and split by lines
-        dataFile = io.readFile(self.PATH_TO_DATA_FILE)
-        Lines = dataFile.readlines()
+        Lines = io.readFile(self.PATH_TO_DATA_FILE).readlines()
 
         #for every line of data
         for line in Lines:

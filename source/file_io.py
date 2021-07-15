@@ -10,8 +10,7 @@ def writeToFile(path, data):
 
 #reads and returns all data in fileName at path
 def readFile(path):
-    with open(path, 'r') as fp:
-        return fp
+    return open(path, 'r')
 
 #writes data to txt file fileName at path
 def appendToFile(path, data):
@@ -20,9 +19,9 @@ def appendToFile(path, data):
 
 #fetch json file at path
 def fetchJSON(path):
-    with open(path, 'r') as f:
-        data = json.load(f)
-        return data
+    f = open(path, 'r')
+    data = json.load(f)
+    return data
 
 #get current timestamp
 def getTimestamp():
