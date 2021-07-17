@@ -1,7 +1,7 @@
 {
     "analytics": {
         "JUST_GRAPH": false,
-        "PATH_TO_DATA_FILE": "../historical_data/2019_1min_intraday/AAPL.txt",
+        "PATH_TO_DATA_FILE": "../historical_data/2015_daily/AAPL.csv",
         "PATH_TO_OUTPUT_FILE": "../analytics_output.csv",
         "SYMBOL": "AAPL",
         "DISPLAY_GRAPH": false,
@@ -16,12 +16,13 @@
         "SHOW_MACD": true
     },
     "backtest": {
+        "JUST_GRAPH": false,
         "PATH_TO_HISTORY_FILE": "../backtest_output/order_history.txt",
         "PATH_TO_RESULTS_FILE": "../backtest_output/backtest_results.csv",
         "PATH_TO_DATA_FILE": "../analytics_output.csv",
         "SYMBOL": "AAPL",
-        "BUDGET": 1000,
-        "DUMP_REMAINING_ASSETS": false,
-        "DISPLAY_RESULTS_GRAPH": true
+        "CASH": 10000,
+        "DISPLAY_RESULTS_GRAPH": true,
+        "USE_CANDLESTICK_ON_RESULTS_GRAPH": false
     }
 }
