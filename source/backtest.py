@@ -82,7 +82,8 @@ class Backtest:
             # call the algorithm
             # <><><><><><><><><><><><><><><><><><>
             # self.simpleMovingAverageCrossover()
-            self.RSIThresholdCrossover()
+            self.bunk()
+            #self.RSIThresholdCrossover()
             # self.MACDandRSI()
             # <><><><><><><><><><><><><><><><><><>
 
@@ -355,6 +356,12 @@ class Backtest:
         if (self.crossesOver("RSI", "RSIL") and self.isAbove("MACDSig", "MACD")):
             self.allIn()
         if (self.crossesOver("RSIU", "RSI") or self.isAboveValue("RSI", 65)):
+            self.allOut()
+
+    def bunk(self):
+        if (self.crossesOver("MACD", "MACDSig")):
+            self.allIn()
+        if (self.crossesOver("MACDSig", "MACD")):
             self.allOut()
 
     # MACD and RSI crossover

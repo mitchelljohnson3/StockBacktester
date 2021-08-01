@@ -1,15 +1,12 @@
 
-2015-06-18 | Bought 78 of AAPL at 127.88 - Average Share Price: 127.88
-2015-07-20 | Sold 78 of AAPL at 132.07 - Average Share Price: 0.0 --> GAIN
-2015-08-12 | Bought 89 of AAPL at 115.24 - Average Share Price: 115.24
-2015-09-14 | Sold 89 of AAPL at 115.31 - Average Share Price: 0.0 --> GAIN
-2015-12-16 | Bought 92 of AAPL at 111.34 - Average Share Price: 111.34
-2016-03-01 | Sold 92 of AAPL at 100.53 - Average Share Price: 0.0 --> LOSS
-2016-05-17 | Bought 99 of AAPL at 93.49 - Average Share Price: 93.49
-2016-05-25 | Sold 99 of AAPL at 99.62 - Average Share Price: 0.0 --> GAIN
-2016-06-21 | Bought 103 of AAPL at 95.91 - Average Share Price: 95.91
-2016-07-15 | Sold 103 of AAPL at 98.78 - Average Share Price: 0.0 --> GAIN
-2016-09-12 | Bought 97 of AAPL at 105.44 - Average Share Price: 105.44
-2016-09-15 | Sold 97 of AAPL at 115.57 - Average Share Price: 0.0 --> GAIN
-2016-11-16 | Bought 102 of AAPL at 109.99 - Average Share Price: 109.99
-2016-12-05 | Sold 102 of AAPL at 109.11 - Average Share Price: 0.0 --> LOSS
+3/20/2020 | Bought 5 of AAPL at 1846.09 - Average Share Price: 1846.09
+5/1/2020 | Sold 5 of AAPL at 2286.04 - Average Share Price: 0.0 --> GAIN
+6/9/2020 | Bought 4 of AAPL at 2600.86 - Average Share Price: 2600.86
+7/16/2020 | Sold 4 of AAPL at 2999.9 - Average Share Price: 0.0 --> GAIN
+8/19/2020 | Bought 4 of AAPL at 3260.48 - Average Share Price: 3260.48
+9/4/2020 | Sold 4 of AAPL at 3294.62 - Average Share Price: 0.0 --> GAIN
+9/29/2020 | Bought 4 of AAPL at 3144.88 - Average Share Price: 3144.88
+10/21/2020 | Sold 4 of AAPL at 3184.94 - Average Share Price: 0.0 --> GAIN
+11/25/2020 | Bought 4 of AAPL at 3185.07 - Average Share Price: 3185.07
+12/9/2020 | Sold 4 of AAPL at 3104.2 - Average Share Price: 0.0 --> LOSS
+12/16/2020 | Bought 4 of AAPL at 3240.96 - Average Share Price: 3240.96

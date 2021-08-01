@@ -1,13 +1,13 @@
 {
     "analytics": {
         "JUST_GRAPH": false,
-        "PATH_TO_DATA_FILE": "../historical_data/2015_daily/AAPL.csv",
+        "PATH_TO_DATA_FILE": "../historical_data/AMZN%1Day%2020-01-01%2021-01-01.csv",
         "PATH_TO_OUTPUT_FILE": "../analytics_output.csv",
-        "SYMBOL": "AAPL",
+        "SYMBOL": "AMZN",
         "DISPLAY_GRAPH": false,
         "QUEUE_MAX_SIZE": 200,
-        "SIMPLE_MOVING_AVERAGE": [5,20],
-        "EXPONENTIAL_MOVING_AVERAGE": [5,20],
+        "SIMPLE_MOVING_AVERAGE": [],
+        "EXPONENTIAL_MOVING_AVERAGE": [],
         "SHOW_RSI": true,
         "RSI_PERIOD": 14,
         "SHOW_RSI_BOUNDS": true,
